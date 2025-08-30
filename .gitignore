@@ -80,7 +80,7 @@ dist
 
 # Gatsby files
 .cache/
-public
+# public (commented out - we need our public directory for the web interface)
 
 # Storybook build outputs
 .out

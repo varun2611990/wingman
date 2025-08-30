@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Wingman - Your Keyboard-First Productivity Launcher</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🚀</span>
+                <h1>Wingman</h1>
+            </div>
+            <p class="subtitle">Your Keyboard-First Productivity Launcher</p>
+        </header>
+
+        <!-- Quick Start Section -->
+        <section class="quick-start">
+            <h2>Quick Start</h2>
+            <p class="instruction">
+                Press <kbd>Ctrl</kbd> + <kbd>Space</kbd> to open the command launcher
+            </p>
+            
+            <!-- Feature Cards -->
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Launch Apps</h3>
+                    <p>Quickly open your favorite applications</p>
+                    <code>Try: "open vscode"</code>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>System Commands</h3>
+                    <p>Control your system with simple commands</p>
+                    <code>Try: "volume up", "lock"</code>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Extensions</h3>
+                    <p>Integrate with GitHub, weather, and more</p>
+                    <code>Try: "github issues"</code>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Command History</h3>
+                    <p>Access your recent commands quickly</p>
+                    <code>View history below</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Commands Section -->
+        <section class="recent-commands">
+            <h2>Recent Commands</h2>
+            <div class="commands-container" id="commandsContainer">
+                <div class="no-commands">
+                    <p>No commands executed yet. Try opening the launcher!</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Command Launcher Modal -->
+    <div class="launcher-overlay" id="launcherOverlay">
+        <div class="launcher-modal" id="launcherModal">
+            <div class="launcher-header">
+                <div class="launcher-icon">⌘</div>
+                <input 
+                    type="text" 
+                    class="launcher-input" 
+                    id="launcherInput" 
+                    placeholder="Type a command..."
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+                <div class="launcher-shortcut">Ctrl+Space</div>
+            </div>
+            
+            <div class="suggestions-container" id="suggestionsContainer">
+                <!-- Suggestions will be populated here -->
+            </div>
+            
+            <div class="launcher-footer">
+                <span>↑ ↓ Navigate • Enter Execute • Esc Close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <span class="status-text">Ready • Press Ctrl+Space to start</span>
+        <div class="status-info">
+            <span class="server-status" id="serverStatus">Server: Running</span>
+            <span class="port-info">Port: 3000</span>
+        </div>
+    </div>
+
+    <!-- Command Output Modal -->
+    <div class="output-overlay" id="outputOverlay">
+        <div class="output-modal">
+            <div class="output-header">
+                <h3>Command Output</h3>
+                <button class="close-btn" id="closeOutputBtn">&times;</button>
+            </div>
+            <div class="output-content" id="outputContent">
+                <!-- Command output will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
