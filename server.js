@@ -3,9 +3,13 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const { exec } = require('child_process');
+const ExtensionLoader = require('./src/extensionLoader');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Initialize extension loader
+const extensionLoader = new ExtensionLoader();
 
 // Middleware
 app.use(cors());
@@ -27,7 +31,7 @@ let config = {
 app.get('/api/commands/suggest', (req, res) => {
   const { query } = req.query;
   
-  const commands = [
+  const systemCommands = [
     { name: 'open vscode', description: 'Open Visual Studio Code', type: 'app' },
     { name: 'open notepad', description: 'Open Notepad', type: 'app' },
     { name: 'open calculator', description: 'Open Calculator', type: 'app' },
@@ -35,14 +39,16 @@ app.get('/api/commands/suggest', (req, res) => {
     { name: 'restart', description: 'Restart computer', type: 'system' },
     { name: 'lock', description: 'Lock screen', type: 'system' },
     { name: 'volume up', description: 'Increase volume', type: 'system' },
-    { name: 'volume down', description: 'Decrease volume', type: 'system' },
-    { name: 'github issues', description: 'List GitHub issues', type: 'extension' },
-    { name: 'weather', description: 'Get weather info', type: 'extension' }
+    { name: 'volume down', description: 'Decrease volume', type: 'system' }
   ];
+  
+  // Get extension suggestions
+  const extensionSuggestions = extensionLoader.getExtensionSuggestions(query);
 
-  let suggestions = commands;
+  let suggestions = [...systemCommands, ...extensionSuggestions];
+  
   if (query) {
-    suggestions = commands.filter(cmd => 
+    suggestions = suggestions.filter(cmd => 
       cmd.name.toLowerCase().includes(query.toLowerCase()) ||
       cmd.description.toLowerCase().includes(query.toLowerCase())
     );
@@ -96,10 +102,45 @@ app.post('/api/config', (req, res) => {
   res.json({ success: true, config });
 });
 
+// Extension management endpoints
+app.get('/api/extensions', (req, res) => {
+  const extensions = extensionLoader.getAllExtensions().map(ext => ({
+    name: ext.name,
+    command: ext.command,
+    description: ext.description,
+    type: ext.type
+  }));
+  
+  res.json({ extensions });
+});
+
+app.post('/api/extensions/reload', (req, res) => {
+  const count = extensionLoader.reloadExtensions();
+  res.json({ 
+    success: true, 
+    message: `Reloaded ${count} extensions`,
+    count 
+  });
+});
+
 // Command execution logic
 async function executeCommand(command, args) {
   const cmd = command.toLowerCase().trim();
+  const parts = cmd.split(' ');
+  const mainCommand = parts[0];
+  const subCommands = parts.slice(1);
   
+  // Check if it's an extension command first
+  const extensionCommands = extensionLoader.getExtensionCommands();
+  
+  for (const extCmd of extensionCommands) {
+    if (cmd.startsWith(extCmd)) {
+      const extensionArgs = cmd.substring(extCmd.length).trim().split(' ').filter(arg => arg);
+      return await extensionLoader.executeExtension(extCmd, extensionArgs);
+    }
+  }
+  
+  // Handle built-in commands
   if (cmd.startsWith('open ')) {
     return await executeAppCommand(cmd.substring(5));
   } else if (cmd === 'shutdown') {
@@ -112,10 +153,6 @@ async function executeCommand(command, args) {
     return await executeSystemCommand('powershell -c "(New-Object -comObject WScript.Shell).SendKeys([char]175)"');
   } else if (cmd === 'volume down') {
     return await executeSystemCommand('powershell -c "(New-Object -comObject WScript.Shell).SendKeys([char]174)"');
-  } else if (cmd === 'github issues') {
-    return { success: true, message: 'GitHub extension not implemented yet', type: 'info' };
-  } else if (cmd === 'weather') {
-    return { success: true, message: 'Weather extension not implemented yet', type: 'info' };
   } else {
     return { success: false, message: `Unknown command: ${command}` };
   }
