@@ -1,0 +1,567 @@
+/* Wingman - Dark Theme Styles */
+:root {
+    --bg-primary: #1a1d29;
+    --bg-secondary: #2d3748;
+    --bg-tertiary: #4a5568;
+    --bg-modal: #2d3748;
+    --bg-card: #2d3748;
+    --bg-input: #1a202c;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --text-muted: #718096;
+    --accent: #4299e1;
+    --accent-hover: #3182ce;
+    --success: #48bb78;
+    --warning: #ed8936;
+    --danger: #f56565;
+    --border: #4a5568;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --blur-bg: rgba(26, 29, 41, 0.9);
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 60px);
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo-icon {
+    font-size: 3rem;
+}
+
+.logo h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Quick Start Section */
+.quick-start {
+    margin-bottom: 3rem;
+}
+
+.quick-start h2 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.instruction {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+/* Keyboard Keys */
+kbd {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-family: monospace;
+    font-size: 0.9em;
+    padding: 0.2em 0.4em;
+    margin: 0 0.1em;
+    box-shadow: 0 1px 1px var(--shadow);
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--shadow);
+    border-color: var(--accent);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.feature-card code {
+    background: var(--bg-input);
+    color: var(--accent);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: 'Monaco', 'Menlo', monospace;
+    display: block;
+    border: 1px solid var(--border);
+}
+
+/* Recent Commands Section */
+.recent-commands {
+    margin-bottom: 2rem;
+}
+
+.recent-commands h2 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.commands-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    min-height: 200px;
+}
+
+.no-commands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.command-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-input);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+}
+
+.command-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.command-text {
+    font-family: monospace;
+    color: var(--text-primary);
+}
+
+.command-time {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Launcher Modal */
+.launcher-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--blur-bg);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.launcher-overlay.active {
+    display: flex;
+}
+
+.launcher-modal {
+    background: var(--bg-modal);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 20px 40px var(--shadow);
+    animation: slideUp 0.3s ease;
+    overflow: hidden;
+}
+
+.launcher-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    gap: 1rem;
+}
+
+.launcher-icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.launcher-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-family: var(--font-family);
+    outline: none;
+    padding: 0.5rem 0;
+}
+
+.launcher-input::placeholder {
+    color: var(--text-muted);
+}
+
+.launcher-shortcut {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: monospace;
+}
+
+.suggestions-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border-bottom: 1px solid var(--border);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+    background: var(--bg-tertiary);
+}
+
+.suggestion-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.suggestion-icon.app {
+    background: var(--accent);
+    color: white;
+}
+
+.suggestion-icon.system {
+    background: var(--danger);
+    color: white;
+}
+
+.suggestion-icon.extension {
+    background: var(--success);
+    color: white;
+}
+
+.suggestion-content {
+    flex: 1;
+}
+
+.suggestion-title {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+}
+
+.suggestion-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.suggestion-type {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.launcher-footer {
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Output Modal */
+.output-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--blur-bg);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.output-overlay.active {
+    display: flex;
+}
+
+.output-modal {
+    background: var(--bg-modal);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    box-shadow: 0 20px 40px var(--shadow);
+    animation: slideUp 0.3s ease;
+    overflow: hidden;
+}
+
+.output-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-secondary);
+}
+
+.output-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.output-content {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    font-family: 'Monaco', 'Menlo', monospace;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    background: var(--bg-input);
+    color: var(--text-primary);
+}
+
+/* Status Bar */
+.status-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    z-index: 100;
+}
+
+.status-text {
+    color: var(--text-secondary);
+}
+
+.status-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.server-status {
+    color: var(--success);
+}
+
+.port-info {
+    color: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading States */
+.loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--border);
+    border-top: 2px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .launcher-modal {
+        width: 95%;
+        margin: 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 2rem;
+    }
+    
+    .status-info {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .launcher-header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .suggestion-item {
+        padding: 0.5rem 1rem;
+    }
+    
+    .output-content {
+        padding: 1rem;
+    }
+}
